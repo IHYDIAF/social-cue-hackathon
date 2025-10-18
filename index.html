@@ -16,6 +16,36 @@
             --color-4: #d8d78f;
             --color-5: #89cff0;
             color: var(--color-4);
+
+            --emotion-color-happy: #89cff0;
+            --emotion-color-sad: #6457a6;
+            --emotion-color-angry: #ef959d;
+            --emotion-color-surprised: #d8d78f;
+            --emotion-color-neutral: #4a7c59;
+        }
+
+        .video-frame {
+            width: 95%;
+            aspect-ratio: 1 / 1;
+            border: 15px solid var(--emotion-color-happy);   
+            border-radius: 30px;
+            overflow: hidden;    
+            max-width: 700px;
+            max-height: 700px;
+            margin: 2rem auto;
+            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+        }
+
+        #capture {
+            display: block;
+            margin: 1rem auto;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            background-color: var(--color-2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
         body {
@@ -36,6 +66,25 @@
             max-width: 900px;
             margin: 0 auto;
             color: var(--color-4);
+            display: flex;
+            flex-direction: column;
+        }
+
+        section {
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        #emotion-box {
+            width: 100px;
+            height: 100px;
+            margin: 1rem auto;
+            border-radius: 50%;
+            background-color: var(--emotion-color-happy);
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -52,7 +101,9 @@
 
         <section id="camera">
             <h2>Camera Feed</h2>
-            <video id="video" width="640" height="480" autoplay muted></video>
+            <div class="video-frame">
+                <video id="video" autoplay muted></video>
+            </div>
             <button id="capture">Analyze Emotion</button>
         </section>
 
@@ -61,10 +112,6 @@
             <div id="emotion-box"></div>
             <p id="emotion-text">No emotion detected yet.</p>
         </section>
-
-        <div class="colored-box">
-
-        </div>
     </main>
 
     <footer>
