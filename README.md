@@ -1,1 +1,1 @@
-# cue-hackathon
+# social-cue-hackathon
