@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Access Example</title>
+     <!--Accumulus Validator-->
+    <script src="https://lint.page/kit/4d0fe3.js" crossorigin="anonymous"></script>
+    <style>
+        /* Just to make the video look nice */
+        body {
+            display: grid;
+            place-items: center;
+            min-height: 90vh;
+            background: #f4f4f4;
+        }
+        video {
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Webcam Live Feed</h1>
+    
+    <video id="webcam" autoplay playsinline></video>
+
+    <script src="scripts/camera-access.js"></script>
+
+</body>
+</html>
