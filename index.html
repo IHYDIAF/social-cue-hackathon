@@ -25,15 +25,24 @@
         }
 
         .video-frame {
-            width: 95%;
+            width: 90%;
+            max-width: 750px;
             aspect-ratio: 1 / 1;
-            border: 15px solid var(--emotion-color-happy);   
-            border-radius: 30px;
-            overflow: hidden;    
-            max-width: 700px;
-            max-height: 700px;
-            margin: 2rem auto;
-            box-shadow: 0 0 12px rgba(0,0,0,0.2);
+            border: 8px solid var(--emotion-color-angry);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 1rem auto;
+            background: #111;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.25), inset 0 0 10px rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+        }
+
+        #capture:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35), inset 0 0 15px rgba(255,255,255,0.15);
         }
 
         #capture {
@@ -52,8 +61,7 @@
             font-family: var(--font-sans);
             margin: 0;
             padding: 0;
-            background: var(--color-1);
-            
+            background: linear-gradient(145deg, #4a7c59 0%, #3c6549 100%);
         }
 
         header, footer {
@@ -62,8 +70,8 @@
         }
 
         main {
-            padding: 2rem;
-            max-width: 900px;
+            padding: 1rem;
+            max-width: 1200px;
             margin: 0 auto;
             color: var(--color-4);
             display: flex;
@@ -79,12 +87,59 @@
         }
 
         #emotion-box {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             margin: 1rem auto;
             border-radius: 50%;
             background-color: var(--emotion-color-happy);
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        #webcam {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;     
+            object-position: center;
+            display: block; 
+        }
+
+        #emotion-grid {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 1;
+        }
+
+        #emotion-grid > section {
+            flex: 1;
+            min-width: 250px;
+            height: auto;
+            padding: 1.5rem;
+        }
+
+        #camera {
+            flex: 1.6;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 1rem;
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        #emotion-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 400px;
+            background: rgba(255,255,255,0.04);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
     </style>
 </head>
@@ -99,19 +154,26 @@
             <p>Social Cue is an AI-powered web app that analyzes facial expressions in real time to indentify human emotions.</p>
         </section>
 
-        <section id="camera">
-            <h2>Camera Feed</h2>
-            <div class="video-frame">
-                <video id="webcam" autoplay muted playsinline></video>
+        <section id="emotion-grid">
+            <section id="emotion-display">
+                <h2>Detected Emotion</h2>
+                <div id="emotion-box"></div>
+                <p id="emotion-text">No emotion detected yet.</p>
+            </section>
 
-            </div>
-            <button id="capture">Analyze Emotion</button>
-        </section>
+            <section id="camera">
+                <h2>Camera Feed</h2>
+                <div class="video-frame">
+                    <video id="webcam" autoplay muted playsinline></video>
+                </div>
+                <button id="capture">Analyze Emotion</button>
+            </section>
 
-        <section id="emotion-display">
-            <h2>Detected Emotion</h2>
-            <div id="emotion-box"></div>
-            <p id="emotion-text">No emotion detected yet.</p>
+            <section id="emotion-key">
+                <h2>Detected Emotion</h2>
+                <div id="emotion-box"></div>
+                <p id="emotion-text">No emotion detected yet.</p>
+            </section>
         </section>
     </main>
 
