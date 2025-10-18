@@ -6,6 +6,38 @@
     <title>Social Cue Hackathon</title>
     <meta name="description" content="Starter HTML boilerplate for the Social Cue Hackathon project." />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+        :root {
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+                Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            --color-1: #4a7c59;
+            --color-2: #6457a6;
+            --color-3: #ef959d;
+            --color-4: #d8d78f;
+            --color-5: #89cff0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            margin: 0;
+            padding: 0;
+            background: #fafafa;
+            color: #222;
+        }
+
+        header, footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--color-primary);
+            color: black;
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -13,8 +45,21 @@
     </header>
 
     <main>
-        <section id="app">
-            <!-- Your app markup goes here -->
+        <section id="about">
+            <h2>About</h2>
+            <p>Social Cue is an AI-powered web app that analyzes facial expressions in real time to indentify human emotions.</p>
+        </section>
+
+        <section id="camera">
+            <h2>Camera Feed</h2>
+            <video id="video" width="640" height="480" autoplay muted></video>
+            <button id="capture">Analyze Emotion</button>
+        </section>
+
+        <section id="emotion-display">
+            <h2>Detected Emotion</h2>
+            <div id="emotion-box"></div>
+            <p id="emotion-text">No emotion detected yet.</p>
         </section>
     </main>
 
