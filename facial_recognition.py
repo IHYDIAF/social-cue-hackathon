@@ -14,7 +14,7 @@ from matplotlib import pyplot as plt
 # Settings
 DETECTOR = "opencv"          # "retinaface" (better) or "opencv" (faster, no extra weights)
 FRAME_DOWNSCALE = 0.75           # downscale to speed up (0.5–1.0). 1.0 = full size
-INFER_EVERY_N_FRAMES = 10         # run model every N frames, reuse last result in between
+INFER_EVERY_N_FRAMES = 30         # run model every N frames, reuse last result in between
 
 # State
 last_emotions = []               # list of results for each detected face in last inference
