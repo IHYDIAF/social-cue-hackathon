@@ -143,7 +143,17 @@ def generate_insight():
 @app.route("/insight")
 def get_insight():
     global global_state
-    return jsonify({"insight": global_state["insight"]})
+    insight_text = global_state["insight"]
+
+    import re
+    split_insights = re.split(r'\n\s*\d+\.\s*', insight_text.strip())
+
+    formatted = [s.strip() for s in split_insights if s.strip()]
+
+    return jsonify({
+        "insight": global_state["insight"],
+        "points": formatted
+    })
 
 
 # --- Run Backend ---
