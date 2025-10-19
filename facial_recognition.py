@@ -146,13 +146,20 @@ def get_insight():
     insight_text = global_state["insight"]
 
     import re
-    split_insights = re.split(r'\n\s*\d+\.\s*', insight_text.strip())
+    split_insights = re.split(r'(?:\n\s*\d+\.\s*|\n\s*-\s*|\*\s*)', insight_text.strip())
 
     formatted = [s.strip() for s in split_insights if s.strip()]
 
+    intro = formatted[0] if formatted else ""
+    points = formatted[1:] if len(formatted) > 1 else []
+
+    if points and points[0][:60].lower() in intro.lower():
+        points = points[1:]
+
     return jsonify({
+        "intro": intro,
         "insight": global_state["insight"],
-        "points": formatted
+        "points": points
     })
 
 

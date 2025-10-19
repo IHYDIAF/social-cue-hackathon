@@ -40,21 +40,46 @@
                 const box = document.createElement("div");
                 box.classList.add("insight-box");
 
+                // 🧠 Try multiple ways to separate title and body
+                let title = text.trim();
+                let body = "";
+
+                // Case 1: Split by newline if Hermes formatted it as lines
+                if (text.includes("\n")) {
+                    const parts = text.split("\n").map(s => s.trim()).filter(Boolean);
+                    title = parts[0];
+                    body = parts.slice(1).join(" ");
+                }
+
+                // Case 2: Split by colon
+                else if (text.includes(":")) {
+                    const parts = text.split(":");
+                    title = parts[0].trim();
+                    body = parts.slice(1).join(":").trim();
+                }
+
+                // Case 3: Split by first period (fallback)
+                else {
+                    const firstPeriod = text.indexOf(".");
+                    if (firstPeriod !== -1) {
+                        title = text.slice(0, firstPeriod + 1).trim();
+                        body = text.slice(firstPeriod + 1).trim();
+                    }
+                }
+
+                // Create the DOM structure
                 const header = document.createElement("button");
                 header.classList.add("insight-header");
-                header.textContent = `${i + 1}. ${text.split(":")[0] || "Insight"}`;
+                header.textContent = `${i + 1}. ${title}`;
 
-                const body = document.createElement("div");
-                body.classList.add("insight-body");
-                body.textContent = text.includes(":") ? text.split(":").slice(1).join(":").trim() : text;
+                const bodyDiv = document.createElement("div");
+                bodyDiv.classList.add("insight-body");
+                bodyDiv.textContent = body || "(No additional details provided.)";
 
-                // Expand/collapse
-                header.addEventListener("click", () => {
-                    box.classList.toggle("active");
-                });
+                header.addEventListener("click", () => box.classList.toggle("active"));
 
                 box.appendChild(header);
-                box.appendChild(body);
+                box.appendChild(bodyDiv);
                 container.appendChild(box);
             });
         } catch (err) {
