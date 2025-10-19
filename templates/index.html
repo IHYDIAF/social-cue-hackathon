@@ -165,10 +165,20 @@
                 <button id="capture">Analyze Emotion</button>
             </section>
 
-            <section id="hermes-insight">
+           <section id="hermes-insight">
                 <h2>Further Insight - Kronoslabs</h2>
-                <div id="hermes-box"><p>Enter Context Here...</p></div>
-                <p id="hermes-output">Hermes Response here</p>
+                <div id="hermes-box">
+                    <label for="context-input" style="display:block; margin-bottom:8px;">
+                        Provide conversation context:
+                    </label>
+                    <textarea id="context-input" rows="4" style="width: 100%; border-radius: 8px; padding: 10px; border: 1px solid var(--color-4); background: #fff; color: #333;"></textarea>
+                    <button id="get-insight-btn" style="margin-top: 10px; padding: 0.75rem 1.5rem; font-size: 1rem; background-color: var(--color-2); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                        Get Insight
+                    </button>
+                </div>
+                <p id="hermes-output" style="margin-top: 1.5rem; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px; min-height: 50px;">
+                    Hermes Response will appear here...
+                </p>
             </section>
         </section>
     </main>
