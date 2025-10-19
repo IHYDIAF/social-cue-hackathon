@@ -26,7 +26,7 @@ async function fetchEmotion() {
 }
 
 function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 
@@ -63,7 +63,7 @@ async function captureAndAnalyze() {
             console.error("Error analyzing image:", err);
         }
 
-        await delay(100);
+        await delay(500);
     }
 }
 
