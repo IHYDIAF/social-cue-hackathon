@@ -4,7 +4,7 @@
     const ANALYSIS_INTERVAL_MS = 1000; // 1 frames per second
 
     function wait(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+        return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
     // --- Get Elements ---
@@ -46,7 +46,7 @@
 
                 // Case 1: Split by newline if Hermes formatted it as lines
                 if (text.includes("\n")) {
-                    const parts = text.split("\n").map(s => s.trim()).filter(Boolean);
+                    const parts = text.split("\n").map((s) => s.trim()).filter(Boolean);
                     title = parts[0];
                     body = parts.slice(1).join(" ");
                 }
