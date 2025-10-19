@@ -9,9 +9,9 @@ except Exception:
 
 import cv2
 from deepface import DeepFace
+from matplotlib import pyplot as plt
 
 # Settings
-SOURCE_INDEX = 0                 # 0 = default webcam
 DETECTOR = "opencv"          # "retinaface" (better) or "opencv" (faster, no extra weights)
 FRAME_DOWNSCALE = 0.75           # downscale to speed up (0.5–1.0). 1.0 = full size
 INFER_EVERY_N_FRAMES = 10         # run model every N frames, reuse last result in between
@@ -44,16 +44,38 @@ def draw_faces(frame, results):
         cv2.putText(frame, label, (x + 4, y - 6), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (0, 0, 0), 2, cv2.LINE_AA)
     return frame
 
-# Open webcam
-cap = cv2.VideoCapture(SOURCE_INDEX)
-if not cap.isOpened():
-    raise RuntimeError("Could not open webcam. Try changing SOURCE_INDEX to 1 or 2.")
+# Function to find available cameras
+def find_camera():
+    """Try to find an available camera by testing indices 0-5"""
+    print("Searching for available cameras...")
+    for index in range(6):
+        cap = cv2.VideoCapture(index)
+        if cap.isOpened():
+            ret, frame = cap.read()
+            if ret:
+                print(f"✓ Found working camera at index {index}")
+                return cap, index
+            cap.release()
+    return None, -1
 
+# Open webcam with automatic detection
+cap, cam_index = find_camera()
+
+if cap is None:
+    print("ERROR: No camera found! Please check:")
+    print("  1. USB camera is connected")
+    print("  2. Camera permissions are granted")
+    print("  3. Camera is not in use by another application")
+    sys.exit(1)
+
+print(f"Using camera index {cam_index}")
+print("Press 'q' to quit\n")
 
 t0 = time.time()
 while True:
     ok, frame = cap.read()
     if not ok:
+        print("Failed to read frame - camera may have disconnected")
         break
 
     # Optional resize for speed
@@ -83,7 +105,7 @@ while True:
             # print(f"Analyze error: {e}")  # uncomment for debugging
             last_emotions = []
 
-    # Draw latest results (even on frames we didn’t infer)
+    # Draw latest results (even on frames we didn't infer)
     vis = frame.copy()
     vis = draw_faces(vis, last_emotions)
 
