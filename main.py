@@ -1,7 +1,7 @@
 import cv2
 from matplotlib import pyplot as plt
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 # Loop through every frame until we close our webcam
 while cap.isOpened(): 
     ret, frame = cap.read()
